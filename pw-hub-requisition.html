@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a2478">
+<title>PW-Hub | เบิกของ</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;600;800&display=swap">
+<style>
+:root{--bg:#f4f5fa;--card:#fff;--fg:#14183a;--mute:#555b7a;--line:#d6d9e8;--ac:#0a2478;--acf:#fff;--acs:#e1e7ff;--wr:#8a4b00;--wrs:#fdeccd;--er:#b3261e;--font:"Sarabun","Noto Sans Thai",system-ui,sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10122a;--card:#1a1d3d;--fg:#eef0ff;--mute:#a9aed0;--line:#33376a;--ac:#8fa6ff;--acf:#0a1038;--acs:#232a5e;--wr:#ffc46b;--wrs:#3b2c10;--er:#ff8a80;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:20px/1.5 var(--font);padding:0 max(16px,env(safe-area-inset-right)) 150px max(16px,env(safe-area-inset-left))}
+html{padding-top:env(safe-area-inset-top)}
+.wrap{max-width:600px;margin:0 auto}
+h1{font-size:30px;margin:18px 0 4px;font-weight:800}
+.sub,.hint{color:var(--mute);margin:0}.hint{font-size:17px;margin-top:6px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.pill{min-height:48px;padding:0 18px;border-radius:24px;border:2px solid var(--line);background:var(--card);color:var(--fg);font:600 18px var(--font)}
+.dots{display:flex;gap:8px;margin:14px 0 4px}.dots i{flex:1;height:10px;border-radius:5px;background:var(--line)}.dots i.on{background:var(--ac)}
+.sn{font-weight:800;font-size:22px;margin:6px 0 0}
+.tabs{display:flex;gap:10px;overflow-x:auto;padding:12px 0}
+.tab{flex:none;min-height:54px;padding:0 20px;border-radius:27px;border:2px solid var(--line);background:var(--card);color:var(--fg);font:600 19px var(--font)}
+.tab[aria-pressed=true]{background:var(--ac);border-color:var(--ac);color:var(--acf)}
+.field{width:100%;min-height:62px;border-radius:16px;border:2px solid var(--line);background:var(--card);color:var(--fg);font:600 22px var(--font);padding:8px 16px;margin-bottom:10px}
+.field:focus{outline:4px solid var(--ac);border-color:var(--ac)}
+.item{display:flex;align-items:center;gap:12px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:12px;margin-bottom:12px}
+.item.has{border-color:var(--ac);background:var(--acs)}
+.pic{width:64px;height:64px;border-radius:12px;background:var(--bg);flex:none;display:grid;place-items:center;font-size:30px;overflow:hidden}
+.pic img{width:100%;height:100%;object-fit:cover}
+.info{flex:1;min-width:0}.nm{font-weight:800;font-size:21px;line-height:1.25;overflow-wrap:anywhere}
+.meta{color:var(--mute);font-size:17px}.low{color:var(--er);font-weight:600}
+.qty{display:flex;align-items:center;gap:4px;flex:none}
+.qty button{width:56px;height:56px;border-radius:14px;border:2px solid var(--ac);background:var(--card);color:var(--ac);font:800 32px/1 var(--font);padding:0}
+.qty .pl{background:var(--ac);color:var(--acf)}.qty button:disabled{opacity:.3}
+.qty input{width:56px;text-align:center;font:800 26px var(--font);border:0;background:transparent;color:var(--fg);padding:0}
+@media(max-width:440px){.item{flex-wrap:wrap}.info{flex-basis:calc(100% - 80px)}.qty{width:100%;justify-content:space-between}.qty button{width:76px}.qty input{flex:1}}
+.q{font-weight:800;font-size:23px;margin:20px 0 8px}
+.chips{display:flex;flex-wrap:wrap;gap:10px}.chip{min-height:52px;padding:0 18px;border-radius:26px;border:2px solid var(--ac);background:var(--card);color:var(--ac);font:600 19px var(--font)}
+.sum{background:var(--card);border:2px solid var(--line);border-radius:18px;padding:4px 16px;margin-bottom:14px}
+.sum .r{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}.sum .r:last-child{border:0}
+.sum small{display:block;color:var(--mute);font-size:16px}.sum b{white-space:nowrap}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;background:var(--card);border:2px solid var(--line);border-radius:18px;padding:14px 16px}.kv dt{color:var(--mute)}.kv dd{margin:0;font-weight:800;overflow-wrap:anywhere}
+.msg{border-radius:14px;padding:12px 16px;margin:12px 0;font-weight:600;background:var(--wrs);color:var(--wr)}.msg.er{color:var(--er)}
+.done{text-align:center;padding-top:26px}.tick{width:110px;height:110px;border-radius:50%;background:var(--ac);margin:0 auto 16px;display:grid;place-items:center}
+.tick::after{content:"";width:30px;height:56px;border:solid var(--acf);border-width:0 11px 11px 0;transform:rotate(45deg) translate(-4px,-6px)}
+.no{display:inline-block;border:2px dashed var(--ac);border-radius:14px;padding:6px 20px;font-size:28px;font-weight:800;margin:4px 6px;font-variant-numeric:tabular-nums}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--line);padding:12px max(16px,env(safe-area-inset-left)) calc(12px + env(safe-area-inset-bottom))}
+.bar .in{max-width:600px;margin:0 auto}.cnt{display:flex;justify-content:space-between;font-weight:800;font-size:21px;margin-bottom:8px}
+.btns{display:flex;gap:12px}.btn{flex:1;min-height:64px;border-radius:18px;border:0;font:800 23px var(--font);background:var(--ac);color:var(--acf)}
+.btn.bk{flex:0 0 34%;background:var(--card);color:var(--fg);border:2px solid var(--line)}.btn:disabled{opacity:.35}
+button:focus-visible{outline:4px solid var(--fg);outline-offset:3px}[hidden]{display:none!important}
+.stt{display:inline-block;border-radius:30px;padding:8px 24px;font-weight:800;font-size:24px;margin:6px 0}.stt.w{background:var(--wrs);color:var(--wr)}.stt.ok{background:var(--acs);color:var(--ac)}.stt.er{background:var(--wrs);color:var(--er)}
+.st{font-size:15px;color:var(--mute)}.st b{color:var(--er)}.st.ok b{color:#1a7f37}
+</style></head><body>
+<div class="wrap">
+<div class="top"><h1>เบิกของ <span style="font-size:18px;color:var(--mute);font-weight:600">PW-Hub</span></h1><button class="pill" id="out" hidden>ออกจากระบบ</button></div>
+<div class="st" id="cs">กำลังเชื่อมต่อคลัง...</div>
+
+<section id="s0">
+  <p class="sub">เข้าสู่ระบบด้วยบัญชีเดียวกับแอพสต็อก</p>
+  <div class="q">ชื่อผู้ใช้</div><input class="field" id="lu" autocomplete="username" autocapitalize="off">
+  <div class="q">รหัสผ่าน</div><input class="field" id="lp" type="password" autocomplete="current-password">
+  <div class="msg er" id="le" hidden></div>
+</section>
+
+<section id="s1" hidden>
+  <div class="dots"><i class="on"></i><i></i><i></i></div><div class="sn">ขั้นที่ 1 จาก 3: เลือกของ</div>
+  <div class="tabs" id="tabs"></div>
+  <input class="field" id="sq" type="search" placeholder="ค้นหาชื่อ / ขนาด / สี / รหัส">
+  <div id="list"></div>
+</section>
+
+<section id="s2" hidden>
+  <div class="dots"><i class="on"></i><i class="on"></i><i></i></div><div class="sn">ขั้นที่ 2 จาก 3: ใครเบิก ใช้งานอะไร</div>
+  <div class="q">ชื่อผู้เบิก</div><input class="field" id="who">
+  <div class="q">งาน / โครงการ</div><input class="field" id="job" placeholder="พิมพ์ หรือแตะด้านล่าง">
+  <div class="chips" id="jobs"></div>
+  <div class="q">หมายเหตุ (ถ้ามี)</div><input class="field" id="note" placeholder="เช่น ใบเบิกเลขที่ 0045">
+</section>
+
+<section id="s3" hidden>
+  <div class="dots"><i class="on"></i><i class="on"></i><i class="on"></i></div><div class="sn">ขั้นที่ 3 จาก 3: ตรวจและยืนยัน</div>
+  <div class="q" style="margin-top:12px">รายการเบิก</div><div class="sum" id="sum"></div>
+  <dl class="kv" id="kv"></dl><div class="msg er" id="ce" hidden></div>
+</section>
+
+<section id="s4" class="done" hidden>
+  <div class="tick" id="tk"></div><h1 style="margin-top:0" id="dh"></h1>
+  <div class="stt" id="stt" role="status" aria-live="polite"></div>
+  <p class="sub" id="sd"></p><div id="nos" style="margin-top:8px"></div>
+  <p class="sub" id="dn" style="margin-top:8px"></p>
+  <button class="btn" id="rt" style="width:100%;margin-top:14px" hidden>ส่งใหม่อีกครั้ง</button>
+</section>
+</div>
+
+<div class="bar" id="bar" hidden><div class="in">
+  <div class="cnt" id="cnt" hidden><span>เลือกแล้ว</span><span id="cn"></span></div>
+  <div class="btns"><button class="btn bk" id="bk" hidden>ย้อนกลับ</button><button class="btn" id="nx">ถัดไป</button></div>
+</div></div>
+
+<script type="module">
+import {initializeApp} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+import {getFirestore,collection,doc,onSnapshot,writeBatch} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+const db=getFirestore(initializeApp({apiKey:"AIzaSyD0d-Ndb5O0WuNV-fuSPyHa6c6izYqqyJ0",authDomain:"mep-stock-fca42.firebaseapp.com",projectId:"mep-stock-fca42",storageBucket:"mep-stock-fca42.firebasestorage.app",messagingSenderId:"348108889915",appId:"1:348108889915:web:450a9fe83ad7591632211e"}));
+const COL="mep_data",CHUNK=250000,VVIP=["admin","DA1104","tar_admin","tarkun1104"];
+const $=id=>document.getElementById(id),lc=s=>String(s||"").trim().toLowerCase();
+let sstate="",cur=null,D={},known={},live=false,user=null,st,sess=null;
+const reset=()=>st={step:1,wh:"",q:"",cart:{},who:user?user.name||user.username:"",job:"",note:"",nos:[]};
+
+// ---- ซิงค์กับ Firestore (รูปแบบเดียวกับแอพสต็อก: mep_data/<key>__c<n>) ----
+onSnapshot(collection(db,COL),snap=>{
+  const metas={},ch={};
+  snap.forEach(d=>{const m=d.id.match(/^(.*)__c(\d+)$/);if(m)(ch[m[1]]=ch[m[1]]||{})[+m[2]]=d.data().d||"";else metas[d.id]=d.data().n||0});
+  for(const k in metas){known[k]=metas[k];let s="",ok=true;for(let i=0;i<metas[k];i++){if(ch[k]&&ch[k][i]!==undefined)s+=ch[k][i];else{ok=false;break}}
+    if(ok){try{D[k]=JSON.parse(s)}catch(e){}}}
+  live=!snap.metadata.fromCache;
+  $("cs").className="st"+(live?" ok":"");$("cs").innerHTML=live?"<b>●</b> เชื่อมต่อคลังแล้ว (ข้อมูลสดจากแอพสต็อก)":"<b>●</b> กำลังเชื่อมต่อ... ยังเบิกไม่ได้";
+  if(!user)trySession();else if(st.step===1)drawList();
+},e=>{$("cs").innerHTML="<b>●</b> เชื่อมต่อไม่ได้: "+(e.code||e.message)});
+
+async function write(changes){
+  const b=writeBatch(db);
+  for(const[k,j]of Object.entries(changes)){
+    const parts=[];for(let i=0;i<j.length;){let e=Math.min(i+CHUNK,j.length);const c=j.charCodeAt(e-1);if(e<j.length&&c>=0xD800&&c<=0xDBFF)e--;parts.push(j.slice(i,e));i=e}
+    if(!parts.length)parts.push("");
+    parts.forEach((p,i)=>b.set(doc(db,COL,k+"__c"+i),{d:p}));
+    for(let i=parts.length;i<(known[k]||0);i++)b.delete(doc(db,COL,k+"__c"+i));
+    b.set(doc(db,COL,k),{n:parts.length,t:Date.now()});known[k]=parts.length;
+  }
+  await b.commit();
+}
+
+// ---- สิทธิ์ (ตรงกับกฎของแอพสต็อก) ----
+const isAdm=u=>!!u&&(u.isAdmin===true||VVIP.some(v=>lc(v)===lc(u.username)));
+function subOk(c){const r=(D.mep_subs||{})[c];return !r||r.exp===null||r.exp===undefined||Date.now()<r.exp}
+function canUse(c){if(isAdm(user))return true;const m=new Set(((D.mep_allowed_members||{})[c]||[]).map(lc));const o=(D.mep_company_owners||{})[c];if(o)m.add(lc(o));return m.has(lc(user.username))&&subOk(c)}
+const whs=()=>(D.mep_companies||[]).filter(c=>canUse(c));
+
+// ---- เข้าสู่ระบบ ----
+function login(){
+  const u=lc($("lu").value),p=$("lp").value.trim();
+  const f=(D.mep_users||[]).find(x=>x.username&&lc(x.username)===u&&String(x.password||"").trim()===p);
+  if(!f){$("le").hidden=false;$("le").textContent=live?"ชื่อผู้ใช้หรือรหัสผ่านไม่ถูกต้อง":"ยังโหลดข้อมูลผู้ใช้ไม่เสร็จ รอสักครู่แล้วลองใหม่";return}
+  start(f);try{localStorage.setItem("pwreq_user",f.username)}catch(e){}
+}
+function trySession(){let u;try{u=localStorage.getItem("pwreq_user")}catch(e){}
+  const f=u&&(D.mep_users||[]).find(x=>x.username&&lc(x.username)===lc(u));if(f)start(f)}
+function start(f){user=f;reset();$("out").hidden=false;$("bar").hidden=false;show(1)}
+$("out").onclick=()=>{try{localStorage.removeItem("pwreq_user")}catch(e){}user=null;$("out").hidden=true;$("bar").hidden=true;["s1","s2","s3","s4"].forEach(i=>$(i).hidden=true);$("s0").hidden=false;$("lp").value=""};
+$("lp").onkeydown=e=>{if(e.key==="Enter")login()};
+
+// ---- ขั้นที่ 1: เลือกของ ----
+const key=(c,t)=>c+"\u0001"+t.id;
+const find=(c,id)=>((D.mep_company_tools||{})[c]||[]).find(t=>String(t.id)===String(id));
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+function lowOf(t){const n=parseInt(t.lowQty,10);return isNaN(n)||n<0?9:n}
+function tabs(){const w=whs();if(!w.includes(st.wh))st.wh=w[0]||"";
+  $("tabs").innerHTML="";w.forEach(c=>{const b=document.createElement("button");b.className="tab";b.textContent=c;b.setAttribute("aria-pressed",c===st.wh);b.onclick=()=>{st.wh=c;tabs();drawList()};$("tabs").appendChild(b)})}
+function drawList(){
+  const box=$("list");box.innerHTML="";
+  if(!st.wh){box.innerHTML='<div class="msg">คุณยังไม่มีสิทธิ์เบิกในคลังใดเลย ให้แอดมินเพิ่มชื่อคุณในคลังก่อน</div>';bar();return}
+  const q=lc(st.q);
+  ((D.mep_company_tools||{})[st.wh]||[]).filter(t=>!q||lc([t.id,t.name,t.size,t.color].join(" ")).includes(q)).forEach(t=>{
+    const k=key(st.wh,t),have=Number(t.qty)||0,n=st.cart[k]?st.cart[k].n:0;
+    const d=document.createElement("div");d.className="item"+(n?" has":"");
+    d.innerHTML='<div class="pic">'+(t.img?'<img alt="">':"📦")+'</div><div class="info"><div class="nm">'+esc(t.name)+'</div><div class="meta">'+esc([t.size,t.color].filter(x=>x&&x!=="-").join(" · "))+'</div><div class="meta '+(have<=lowOf(t)?"low":"")+'">คงเหลือ '+have+" "+esc(t.unit)+(have===0?" (หมด)":"")+'</div></div>'+
+      '<div class="qty"><button data-m aria-label="ลด"'+(n?"":" disabled")+'>−</button><input inputmode="numeric" value="'+n+'" aria-label="จำนวน"><button class="pl" data-p aria-label="เพิ่ม"'+(n>=have?" disabled":"")+'>+</button></div>';
+    if(t.img)d.querySelector("img").src=t.img;
+    const set=v=>{v=Math.max(0,Math.min(have,parseInt(v,10)||0));if(v)st.cart[k]={c:st.wh,id:t.id,n:v};else delete st.cart[k];drawList()};
+    d.querySelector("[data-m]").onclick=()=>set(n-1);d.querySelector("[data-p]").onclick=()=>set(n+1);d.querySelector("input").onchange=e=>set(e.target.value);
+    box.appendChild(d)});
+  if(!box.children.length)box.innerHTML='<p class="sub">ไม่พบรายการ</p>';bar();
+}
+$("sq").oninput=e=>{st.q=e.target.value;drawList()};
+const lines=()=>Object.values(st.cart);
+const total=()=>lines().reduce((a,l)=>a+l.n,0);
+
+// ---- นำทาง ----
+function show(n){st.step=n;$("s0").hidden=true;["s1","s2","s3","s4"].forEach((id,i)=>$(id).hidden=i+1!==n);
+  if(n===1){tabs();drawList()}
+  if(n===2){$("who").value=st.who;$("job").value=st.job;$("note").value=st.note;
+    const jobs=[...new Set((D.mep_txlog||[]).filter(x=>x.type==="out"&&x.job).slice(-80).map(x=>x.job).reverse())].slice(0,6);
+    $("jobs").innerHTML="";jobs.forEach(j=>{const b=document.createElement("button");b.className="chip";b.textContent=j;b.onclick=()=>{st.job=j;$("job").value=j;bar()};$("jobs").appendChild(b)})}
+  if(n===3)review();
+  bar();scrollTo(0,0)}
+function review(){
+  $("ce").hidden=true;const s=$("sum");s.innerHTML="";
+  lines().forEach(l=>{const t=find(l.c,l.id);if(!t)return;const r=document.createElement("div");r.className="r";
+    r.innerHTML="<span>"+esc(t.name)+"<small>"+esc(l.c)+" · เหลือหลังเบิก "+((Number(t.qty)||0)-l.n)+"</small></span><b>"+l.n+" "+esc(t.unit)+"</b>";s.appendChild(r)});
+  $("kv").innerHTML="<dt>ผู้เบิก</dt><dd>"+esc(st.who.trim())+"</dd><dt>งาน/โครงการ</dt><dd>"+esc(st.job.trim())+"</dd>"+(st.note.trim()?"<dt>หมายเหตุ</dt><dd>"+esc(st.note.trim())+"</dd>":"")+"<dt>วันที่</dt><dd>"+new Date().toLocaleDateString("th-TH",{day:"numeric",month:"long",year:"numeric"})+"</dd>"}
+function bar(){const n=st.step,nx=$("nx");
+  $("cnt").hidden=n===2||n===4;$("bk").hidden=n===1||n===4;
+  $("cn").textContent=lines().length+" อย่าง รวม "+total()+" ชิ้น";
+  if(n===1){nx.textContent="ถัดไป";nx.disabled=!lines().length}
+  if(n===2){nx.textContent="ถัดไป";nx.disabled=!(st.who.trim()&&st.job.trim())}
+  if(n===3){nx.textContent="ยืนยันเบิกของ";nx.disabled=!live}
+  if(n===4){nx.textContent=sstate==="fail"?"กลับไปแก้ไขใบเบิก":"เบิกของอีกครั้ง";nx.disabled=sstate==="wait"}}
+$("who").oninput=e=>{st.who=e.target.value;bar()};$("job").oninput=e=>{st.job=e.target.value;bar()};$("note").oninput=e=>{st.note=e.target.value};
+$("bk").onclick=()=>show(st.step-1);
+$("nx").onclick=async()=>{
+  if(!user)return;
+  if(st.step<3)return show(st.step+1);
+  if(st.step===4){if(sstate==="fail")return show(3);cur=null;reset();return show(1)}
+  await submit(true);
+};
+
+// ---- ยืนยันเบิก: ตัดสต็อก + บันทึกประวัติ แบบเดียวกับแอพสต็อก ----
+const clean=v=>String(v||"").trim().replace(/\s*\|\s*/g," / ");
+function prepare(){
+  if(!live)return{err:"ยังไม่ได้เชื่อมต่อข้อมูลสด กรุณารอสักครู่"};
+  const cp=k=>JSON.parse(JSON.stringify(D[k]||(k==="mep_txseq"?{}:[])));
+  const tools=cp("mep_company_tools"),log=cp("mep_txlog"),seq=cp("mep_txseq"),sl=cp("mep_logs");
+  const f=(c,id)=>(tools[c]||[]).find(t=>String(t.id)===String(id));
+  const who=clean(st.who),job=clean(st.job),note=clean(st.note),nos=[],now=new Date();
+  for(const l of lines()){
+    if(!canUse(l.c))return{err:"คุณไม่มีสิทธิ์เบิกในคลัง "+l.c};
+    const t=f(l.c,l.id);if(!t)return{err:"ไม่พบรายการบางอย่างในคลังแล้ว กรุณาย้อนกลับไปเลือกใหม่"};
+    if(l.n>(Number(t.qty)||0))return{err:"“"+t.name+"” เหลือ "+(Number(t.qty)||0)+" "+(t.unit||"")+" (มีคนเบิกไปก่อน) กรุณากลับไปแก้จำนวน"};
+  }
+  for(const l of lines()){
+    const t=f(l.c,l.id),after=(Number(t.qty)||0)-l.n,u=t.unit||"";t.qty=after;
+    const no=(Number(seq[l.c])||0)+1;seq[l.c]=no;nos.push(String(no).padStart(4,"0"));
+    log.push({no,company:l.c,type:"out",id:t.id,name:t.name,size:t.size||"-",color:t.color||"-",unit:u,qty:l.n,after,who,job,note,by:user.name||user.username,time:now.toLocaleString("th-TH"),ts:Date.now(),rid:cur.rid});
+    sl.unshift({time:now.toLocaleString("th-TH"),user:user.name||user.username,company:l.c,action:"เบิกสต็อก ["+t.id+":"+t.name+"] -"+l.n+u+" (คงเหลือ "+after+u+") | ผู้เบิก: "+who+" | งาน/โครงการ: "+job+(note?" | หมายเหตุ: "+note:"")+" | ผ่านแอพเบิกของ"});
+  }
+  if(log.length>3000)log.splice(0,log.length-3000);if(sl.length>500)sl.length=500;
+  return{nos,changes:{mep_company_tools:JSON.stringify(tools),mep_txlog:JSON.stringify(log),mep_txseq:JSON.stringify(seq),mep_logs:JSON.stringify(sl)}};
+}
+function setS(k,msg){
+  sstate=k;const m={wait:["กำลังส่งใบเบิก...","⏳ รอ","w","รอเซิร์ฟเวอร์ยืนยัน อย่าปิดหน้านี้"],
+    ok:["เบิกของเรียบร้อยแล้ว","✓ รับเรื่องแล้ว","ok","ตัดสต็อกในแอพสต็อกแล้ว ไปรับของได้เลย"],
+    fail:["ส่งใบเบิกไม่สำเร็จ","✕ ส่งล้มเหลว","er",msg||"ยังไม่ได้ตัดสต็อก"]}[k];
+  $("dh").textContent=m[0];$("stt").textContent=m[1];$("stt").className="stt "+m[2];$("sd").textContent=m[3];
+  $("tk").hidden=k!=="ok";$("rt").hidden=k!=="fail";$("nos").hidden=k==="fail";
+  $("dn").textContent=k==="fail"?"":"รวม "+total()+" ชิ้น · ผู้เบิก "+clean(st.who);bar()}
+async function submit(first){
+  if(first){cur={rid:"R"+Date.now().toString(36)};
+    const p=prepare();if(p.err){const ce=$("ce");ce.textContent=p.err;ce.hidden=false;return}
+    $("ce").hidden=true;show(4);return send(p)}
+  // ส่งซ้ำ: ถ้าครั้งก่อนจริงๆ ไปถึงเซิร์ฟเวอร์แล้ว ไม่ตัดซ้ำ
+  if((D.mep_txlog||[]).some(x=>x.rid===cur.rid)){setS("ok");return}
+  const p=prepare();if(p.err)return setS("fail",p.err);
+  send(p)}
+async function send(p){
+  setS("wait");$("nos").innerHTML=p.nos.map(n=>'<span class="no">#'+n+"</span>").join("");
+  const slow=setTimeout(()=>{if(sstate==="wait")$("sd").textContent="ยังรอเซิร์ฟเวอร์ตอบ อาจเน็ตช้า รอต่อได้ ระบบจะส่งให้เอง"},8000);
+  try{await write(p.changes);setS("ok")}
+  catch(e){setS("fail","ยังไม่ได้ตัดสต็อก ("+(e.code||e.message)+") ตรวจอินเทอร์เน็ตแล้วกดส่งใหม่")}
+  finally{clearTimeout(slow)}}
+$("rt").onclick=()=>submit(false);
+$("lu").onkeydown=e=>{if(e.key==="Enter")$("lp").focus()};
+$("s0").insertAdjacentHTML("beforeend",'<button class="btn" id="lg" style="width:100%;margin-top:6px">เข้าสู่ระบบ</button>');$("lg").onclick=login;
+reset();
+</script>
+</body></html>
